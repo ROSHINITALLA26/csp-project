@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: linear-gradient(180deg, #fff 0%, #F8FAFF 100%);
+  min-height: 100vh;
+}
+
+.card { @apply rounded-2xl bg-white/80 backdrop-blur border border-white/60 shadow-soft; }
+.btn { @apply px-4 py-2 rounded-xl font-medium shadow-soft transition transform active:scale-95; }
+.btn-primary { @apply bg-pastel-pink hover:bg-pastel-purple; }
+.btn-outline { @apply border border-gray-300 hover:bg-gray-50; }
+.safe-bottom { height: env(safe-area-inset-bottom); }
