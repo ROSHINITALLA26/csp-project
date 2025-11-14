@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+interface GalaxyCanvasProps {
+  stars: any[];
+  onClickStar: (s: any) => void;
+}
 
-export default function GalaxyCanvas() {
+export default function GalaxyCanvas({ stars, onClickStar }: GalaxyCanvasProps) {
+
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [recording, setRecording] = useState(false);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
