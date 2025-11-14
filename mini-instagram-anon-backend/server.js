@@ -26,11 +26,6 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// Core middlewares
-app.use(cors({ origin: process.env.ORIGIN?.split(',') || '*', credentials: true }));
-app.use(express.json({ limit: '1mb' }));
-app.use(morgan('dev'));
-
 // Static files for uploaded media
 const uploadDir = process.env.UPLOAD_DIR || 'uploads';
 app.use('/uploads', express.static(path.join(__dirname, uploadDir)));
@@ -65,11 +60,6 @@ mongoose.connect(MONGO_URI).then(() => {
   process.exit(1);
 });
 
-// ✅ Schedule the daily sentiment check at 9 AM
-cron.schedule("0 9 * * *", () => {
-  console.log("🔁 Running daily sentiment check...");
-  runRecommendationEngine();
-});
 
 
 import { analyzeSentiment } from "./src/utils/sentiment.js";
@@ -99,6 +89,13 @@ app.post("/posts", async (req, res) => {
     res.status(500).json({ error: "Failed to create post" });
   }
 });
+
+// ✅ Schedule the daily sentiment check at 9 AM
+cron.schedule("0 9 * * *", () => {
+  console.log("🔁 Running daily sentiment check...");
+  runRecommendationEngine();
+});
+
 
 import starRoutes from "./src/routes/stars.js";
 app.use("/stars", starRoutes);

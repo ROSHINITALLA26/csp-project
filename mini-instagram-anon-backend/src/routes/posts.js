@@ -20,7 +20,7 @@ router.post('/', requireAuth, upload.single('media'), async (req, res) => {
     }
     let mediaUrl = null;
     if (req.file) {
-      mediaUrl = `/uploads/${req.file.filename}`;
+       mediaUrl = `/uploads/${req.file.filename}`;
     }
 if (kind === 'image' && req.file) {
   const absPath = req.file.path;
